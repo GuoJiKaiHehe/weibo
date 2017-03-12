@@ -1,0 +1,72 @@
+*{
+	padding:0;
+	margin:0;
+}
+.ui-dialog {
+padding:0 !important;
+border-radius:0 !important;
+border:1px solid #666 !important;
+}
+.ui-dialog-titlebar {
+height:37px !important;
+border-bottom:none !important;
+border-radius:0 !important;
+padding:0 !important;
+background:url(../img/ui_header_bg.png) !important;
+border:1px solid #fff !important;
+}
+.ui-dialog-title {
+height:37px !important;
+line-height:35px !important;
+font-size:14px !important;
+text-indent:10px !important;
+color:#333 !important;
+}
+.ui-dialog-content {
+width:100% !important;
+}
+.ui-dialog-buttonset button {
+height:35px !important;
+background:url(../img/button.png) !important;
+border:none !important;
+color:#fff !important;
+}
+.ui-dialog-buttonset button:hover {
+background:url(../img/button_hover.png) !important;
+}
+.ui-dialog-titlebar-close {
+background:url(../img/ui_header_bg.png) !important;
+}
+.ui-datepicker-year,.ui-datepicker-month{
+	width:40% !important;
+}
+
+
+body,h1,h2,h3,h4,h5,h6,ul,ol,p,form {
+margin:0;
+padding:0;
+}
+body {
+background:url(../img/weibo_bg.jpg);
+}
+ul,ol {
+list-style:none;
+}
+
+#info {
+line-height:50px;
+font-size:14px;
+font-weight:bold;
+text-indent:50px;
+color:#666;
+}
+.loading{
+	background:url(../img/loading.gif) no-repeat 20px center;
+}
+
+.succ{
+	background:url(../img/success.gif) no-repeat 20px center;
+}
+.Infoerror{
+	background:url(../img/error.png) no-repeat 20px center;
+}
