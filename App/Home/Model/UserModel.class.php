@@ -98,4 +98,17 @@ class UserModel extends  Model{
             return 'false'; 
         }
     }
+    public function getUser($id=0){
+        if(!$id){
+            $id=session('user_auth')['id'];
+        }
+        return $this->where('id='.$id)->find();
+    }
+    public function updateUser(){
+         $id=session('user_auth')['id'];
+         $data=array(
+            'intro'=>I('post.intro')
+        );
+        return  $this->where('id='.$id)->save($data);
+    }
 }

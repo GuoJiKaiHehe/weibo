@@ -44,4 +44,17 @@ class UserController extends Controller {
         }
     }
 
+     public function logout(){
+        session(null);
+        cookie('auto',null);
+        $this->success('退出成功！', U('Login/index'));
+    }
+    public function updateUser(){
+        if(IS_AJAX){
+            $user=D('User');
+            echo $user->updateUser();
+        }else{
+            $this->error('非法进入');
+        }
+    }
 }

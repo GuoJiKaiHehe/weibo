@@ -1,3 +1,13 @@
+.clear{
+	zoom:1;
+}
+.clear:after{
+	content:" ";
+	display:block;
+	height:0;
+	visibility:hidden;
+	clear:both;
+}
 *{
 	padding:0;
 	margin:0;
@@ -61,12 +71,12 @@ text-indent:50px;
 color:#666;
 }
 .loading{
-	background:url(../img/loading.gif) no-repeat 20px center;
+	background:url(../img/loading.gif) no-repeat 20px center !important;
 }
 
 .succ{
-	background:url(../img/success.gif) no-repeat 20px center;
+	background:url(../img/success.gif) no-repeat 20px center !important;
 }
 .Infoerror{
-	background:url(../img/error.png) no-repeat 20px center;
+	background:url(../img/error.png) no-repeat 20px center !important;
 }

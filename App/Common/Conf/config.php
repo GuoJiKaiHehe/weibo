@@ -17,5 +17,8 @@ return array(
     'DB_PREFIX'=>'weibo_',
     'DB_CHARSET'=>'utf8',
     'DB_DEBUG'=>TRUE,
+    'TMPL_ACTION_ERROR'=>'Public/jump',
+    'TMPL_ACTION_SUCCESS'=>'Public/jump',
+    'UPLOAD_PATH'=>'./Uploads/',
 
 );

@@ -1,0 +1,38 @@
+<volist name="list" id="item">
+        <dl class="weibo_content_data clear">
+            <dt class="face">
+                <a href="javascript:void(0)"><img src="__IMG__/small_face.jpg" alt=""></a>
+            </dt>
+            <dd class="content clear">
+                <h4><a href="javascript:void(0)">{$item.username}</a></h4>
+                    <p>{$item.content}</p>
+                    <div class="img-list clear">
+                        <notempty name="item.image">
+                           <ol class="clear">
+                            <foreach name="item.image" item="img">
+                                
+                              <li class="small_li"> 
+                              <img src="__ROOT__{$img.thumb}" unfold="__ROOT__{$img.unfold}" source="__ROOT__{$img.source}"  alt="" />
+                               </li>
+                            </foreach>
+                            </ol>
+                            <div class="img_zoom clear" style="display:none;">
+                                <ol>
+                                <li class="in"><a href="javascript:void(0)">收起</a></li>
+                                <li class="source">
+                                <a href="__ROOT__{$img.source}"
+                                target="_blank">查看原图</a>
+                                </li>
+                                </ol>
+                                <img data-src="##"
+                                alt="">
+                                </div>
+                        </notempty>
+                    </div>
+                    <div class="footer">
+                        <span class="time">{$item.create}</span>
+                        <span class="handler">赞(0) | 转播 | 评论 | 收藏</span>
+                     </div>
+            </dd>
+        </dl>
+        </volist>

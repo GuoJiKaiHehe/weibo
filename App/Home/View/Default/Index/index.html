@@ -1,24 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="__CSS__/jquery.ui.css">   
-    <link rel="stylesheet" href="__CSS__/base.css">
-    <link rel="stylesheet" href="__CSS__/index.css">
-    <script type="text/javascript" src="__JS__/jquery.js"></script>
-    <script type="text/javascript" src="__JS__/jquery.ui.js"></script>
-    <script type="text/javascript" src="__JS__/base.js"></script>
-    <script type="text/javascript" src="__JS__/index.js"></script>
-    <script type="text/javascript">
-    var ThinkPHP={
-        'IMG':'__PUBLIC__/{:MODULE_NAME}/img',
-    }
+<extend name="Base/common" />
+
+  <block name="head">
+<script type="text/javascript" src="__JS__/rl_exp.js"></script> 
+
+<link rel="stylesheet" href="__CSS__/rl_exp.css">
+<script type="text/javascript" src="__UPLOADIFY__/jquery.uploadify.min.js"></script> 
+<link rel="stylesheet" href="__UPLOADIFY__/uploadify.css">
+<script type="text/javascript" src="__JS__/index.js"></script>
+<link rel="stylesheet" href="__CSS__/index.css">
+<script type="text/javascript" src="__JS__/kaiUpload.js"></script>
+<script type="text/javascript" src="__JS__/jquery.scrollUp.js"></script>       
+</block>
+
+<block name="main">
+   <div class="main_left">
+    <div class="weibo_form clear">
+    <span class="left">和大家分享一点新鲜事吧？</span>
+
+    <span class="right weibo_num">可以输入<strong>200</strong>
+    个字</span>
+    <textarea class="weibo_text form-control" id="rl_exp_input" rows="5">
+        
+    </textarea>
    
-    </script>
-</head>
-<body>
+    <a href="javascript:void(0);" class="weibo_pic" id="pic_btn">图片</a>
+<div class="weibo_pic_box" id="pic_box" style="display:none;">
+    <div class="weibo_pic_header">
+    <span class="weibo_pic_info">共 0 张，还能上传 4 张（按住ctrl可
+    选择多张）</span>
+    <a href="javascript:void(0);" class="close">×</a>
+    </div>
+    <input type="file" name="file" id="file">
+    <div class="weibo_pic_list">
     
-</body>
-</html>
+    </div>
+</div>
+<a href="javascript:void(0);" id="rl_exp_btn" class="weibo_face">表情</a>
+<div class="rl_exp" id="rl_bq" style="display:none;">
+        <ul class="rl_exp_tab clearfix">
+            <li><a href="javascript:void(0);" class="selected">默认</a></li>
+            <li><a href="javascript:void(0);">拜年</a></li>
+            <li><a href="javascript:void(0);">浪小花</a></li>
+            <li><a href="javascript:void(0);">暴走漫画</a></li>
+        </ul>
+        <ul class="rl_exp_main clearfix rl_selected"></ul>
+        <ul class="rl_exp_main clearfix" style="display:none;"></ul>
+        <ul class="rl_exp_main clearfix" style="display:none;"></ul>
+        <ul class="rl_exp_main clearfix" style="display:none;"></ul>
+        <a href="javascript:void(0);" class="close">×</a>
+    </div>
+
+    <input class="weibo_button btn btn-primary pull-right" type="button" value="发布">
+    </div>
+
+     <div class="weibo_content clear">
+         <ul>
+            <li><a href="javascript:void(0)" class="selected">我关注的<i
+            class="nav_arrow"></i></a></li>
+            <li><a href="javascript:void(0)">互听的</a></li>
+        </ul>
+        <volist name="list" id="item">
+        <dl class="weibo_content_data clear">
+            <dt class="face">
+                <a href="javascript:void(0)"><img src="__IMG__/small_face.jpg" alt=""></a>
+            </dt>
+            <dd class="content clear">
+                <h4><a href="javascript:void(0)">{$item.username}</a></h4>
+                    <p>{$item.content}</p>
+                    <div class="img-list clear">
+                        <notempty name="item.image">
+                           <ol class="clear">
+                            <foreach name="item.image" item="img">
+                                
+                              <li class="small_li"> 
+                              <img src="__ROOT__{$img.thumb}" unfold="__ROOT__{$img.unfold}" source="__ROOT__{$img.source}"  alt="" />
+                               </li>
+                            </foreach>
+                            </ol>
+                            <div class="img_zoom clear" style="display:none;">
+                                <ol>
+                                <li class="in"><a href="javascript:void(0)">收起</a></li>
+                                <li class="source">
+                                <a href="__ROOT__{$img.source}"
+                                target="_blank">查看原图</a>
+                                </li>
+                                </ol>
+                                <img data-src="##"
+                                alt="">
+                                </div>
+                        </notempty>
+                    </div>
+                    <div class="footer">
+                        <span class="time">{$item.create}</span>
+                        <span class="handler">赞(0) | 转播 | 评论 | 收藏</span>
+                     </div>
+            </dd>
+        </dl>
+        </volist>
+        <div id="loadmore">
+            正在加载<img src="__IMG__/loadmore.gif" alt="">
+        </div>
+     </div>
+    </div><!--left weibo-->
+
+
+    <div class="main_right">
+    right
+</div>
+
+<div id="info">
+    
+
+</div>
+<div id="ajax_html1" style="display:none;">
+   <dl class="weibo_content_data clear">
+            <dt class="face">
+                <a href="javascript:void(0)"><img src="__IMG__/small_face.jpg" alt=""></a>
+            </dt>
+            <dd class="content clear">
+                <h4><a href="javascript:void(0)">{:session('user_auth')['username']}</a></h4>
+                    <p>#内容#</p>
+                    <div class="img-list clear">
+                        
+                           <ol class="clear">
+                            
+                                #THUMB#
+                              <!-- <li class="small_li"> 
+                              <img src="__ROOT__{$img.thumb}" unfold="__ROOT__{$img.unfold}" source="__ROOT__{$img.source}"  alt="" />
+                               </li> -->
+                            
+                            </ol>
+                            <div class="img_zoom clear" style="display:none;">
+                                <ol>
+                                <li class="in"><a href="javascript:void(0)">收起</a></li>
+                                <li class="source">
+                                <a href="#查看原图#"target="_blank">查看原图</a>
+                                </li>
+                                </ol>
+                                <img data-src="##"
+                                alt="">
+                                </div>
+                       
+                    </div>
+                    <div class="footer">
+                        <span class="time">#时间#</span>
+                        <span class="handler">赞(0) | 转播 | 评论 | 收藏</span>
+                     </div>
+            </dd>
+        </dl>
+</div>
+
+
+
+</block>

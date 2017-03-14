@@ -26,4 +26,5 @@ class LoginController extends HomeController {
             $this->error('非法进入');
         }
     }
+   
 }

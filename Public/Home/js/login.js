@@ -338,7 +338,7 @@ $(function () {
 					$('#info').dialog('close');
 					$('#login').resetForm();
 					$('#login').off('.login');
-					//location.href=ThinkPHP['INDEX'];
+					location.href=ThinkPHP['INDEX'];
 				},1500);
 			}
 		});

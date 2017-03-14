@@ -9,6 +9,7 @@ return array(
         '__CSS__'=>__ROOT__.'/Public/'.MODULE_NAME.'/css',
         '__JS__'=>__ROOT__.'/Public/'.MODULE_NAME.'/js',
         '__IMG__'=>__ROOT__.'/Public/'.MODULE_NAME.'/img',
+        '__UPLOADIFY__'=>__ROOT__.'/Public/'.MODULE_NAME.'/uploadify',
     ),
     'COOKIE_KEY'=>'guojikai',
 );
