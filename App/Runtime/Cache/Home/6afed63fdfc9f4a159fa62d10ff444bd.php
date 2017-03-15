@@ -42,7 +42,7 @@ var ThinkPHP={
         <div class="logo">微博系统</div>
         <div class="nav">
             <ul>
-            <li><a href="#" class="selected">首页</a></li>
+            <li><a href="<?php echo U('Index/index');?>" class="selected">首页</a></li>
             <li><a href="#">图片</a></li>
             <li><a href="#">找人</a></li>
             </ul>
@@ -51,9 +51,9 @@ var ThinkPHP={
             <ul>
             <li><a href="#"><?php echo session('user_auth')['username'];?></a></li>
             <li class="app">
-                消息
+                消息<span class="badge"><?php echo ($count); ?></span>
                 <dl class="list" style="display:none">
-                    <dd><a href="#">@提到我的</a></dd>
+                    <dd><span class="badge text-right"><?php echo ($count); ?></span><a href="<?php echo U('Setting/refer');?>">@提到我的</a></dd>
                     <dd><a href="#">收到的评论</a></dd>
                     <dd><a href="#">发出的评论</a></dd>
                     <dd><a href="#">我的私信</a></dd>
@@ -89,6 +89,7 @@ var ThinkPHP={
     </a></li>
     <li><a href="<?php echo U('setting/avatar');?>">头像设置</a></li>
     <li><a href="<?php echo U('setting/domain');?>" >个性域名</a></li>
+    <li><a href="<?php echo U('setting/refer');?>" >@提及到我</a></li>
     </ul>
     </div>
     <div class="main_right">
@@ -108,7 +109,7 @@ var ThinkPHP={
 
 </main>
 
-    <footer id="footer">
+    <footer id="footer" class="clear">
       <div class="footer_left">
     &copy; 2014 Ycku.com All Rights Reserved.</div>
     <div class="footer_right">Powered By ThinkPHP.</div>

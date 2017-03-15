@@ -14,7 +14,7 @@ class TopicModel extends  Model{
     );
     //发布微博；
     public function publish($iid='',$reid=0){
-
+        
         $data=array(
             'content'=>I('post.content'),
             'ip'=>get_client_ip(1),
@@ -28,11 +28,32 @@ class TopicModel extends  Model{
              if($data['reid']>0){
                 
                 $this->reCount($reid);
+                //统计转发的次数；
              }
+             //统计@提醒；
+             $this->refer($data['content'],$tid);
+              
             return $tid;
         }else{
             return $this->getError();
         }
+    }
+    public function refer($content,$tid){
+        $pattern='/(@\S+)\s?/i';
+        preg_match_all($pattern, $content, $matches);
+        
+       foreach($matches[0] as $key=>$value){
+            $refer=D('Refer');
+            $user=D('User');
+            $username=substr($value,1);
+            $uid=$user->getUserByUsername2($username)['id'];
+            if($uid){
+                $rid=$refer->referTo($tid,$uid);
+                if(!$rid) return $this->getError();
+            }
+
+       }
+        
     }
     public  function reCount($id){
         // $map['id']=$id;
@@ -102,10 +123,14 @@ $list[$key]['content']=preg_replace('/\[(a|b|c|d)_([0-9]+)\]/i',
            //总页数；
        
     }
-    /*public function getOne($tid){
+    public function getOne($tid){
 
-        return $this->where('id='.$tid)->field('')->find();
-    }*/
+        $obj=$this->where('id='.$tid)->field('uid,content,create,comcount,recount,iid')->find();
+        $user=D('User');
+        $userObj=$user->getUser($obj['uid']);
+        $obj['user']=$userObj;
+        return $obj;
+    }
 
 
 }

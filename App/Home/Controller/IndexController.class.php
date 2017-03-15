@@ -16,4 +16,15 @@ class IndexController extends HomeController {
         }
       
     }
+
+    public function details($tid,$rid){
+        $topic=D("Topic");
+        $refer=D('Refer'); //修改已读；
+        $refer->readRefer($rid);
+        $obj=$topic->getOne($tid);
+
+        $this->assign("obj",$obj);
+        
+        $this->display();
+    }
 }

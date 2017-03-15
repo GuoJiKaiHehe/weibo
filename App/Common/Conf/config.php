@@ -33,7 +33,7 @@ return array(
    // 'COOKIE_KEY'=>'www.ycku.com',
 
     'UPLOAD_PATH'=>'./Uploads/',
-
+ 'DATA_CACHE_TYPE'=>'Memcache',
 
 
     //=开启路由功能；

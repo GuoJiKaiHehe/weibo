@@ -1,0 +1,69 @@
+<extend name="Base/common" />
+<block name="head">
+   
+</block>
+
+
+<block name="main">
+    <div class="main_left">
+        <div class="WB_detail">
+            <div class="WB_info">
+               
+                   
+          
+
+
+         <div class="WB_media_wrap "  style="display: block;">
+            <div class="media_box">
+               <div class="panel panel-default">
+                   <div class="panel-heading">
+                   <a href="{:U('Space/index',array('id'=>$obj['uid']))}">
+                        <img src="__IMG__/small_face.jpg" alt="">
+                   </a>
+                        <a href="">{$obj['user']['username']}</a>
+                   </div>
+                   <div class="panel-body text-primary">
+                       {$obj.content}
+
+                       <input type="text" class="form-control"/>
+                       <div class="footer">
+                        <span class="time">{$obj.create|date}</span>
+                        <span class="handler">赞(0) 
+                         <a href="javascript:void(0)" class="re">转播({$obj.recount})</a> |
+                         <a href="javascript:void(0)" class="com">评论({$obj.comcount})</a> | 收藏(0)</span>
+                         <div class="re_box re_com_box" style="display:none;">
+                            <p>表情、字数限制自行完成</p>
+                            <textarea class="re_text" name="commend"></textarea>
+                            <input type="text" name="reid" value="{$item.id}" />
+                            <input class="re_button btn btn-default" type="button" value="转播">
+                        </div>
+
+                        <!--评论！-->
+                        <div class="com_box re_com_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="comment_text"></textarea>
+                        <input type="hidden" name="tid" value="{$item.id}" />
+                        <input class="com_button btn btn-default pull-right" type="button" value="评论">
+                        <div class="comment_content">
+                        <!--这里通过Ajax插入评论列表-->
+                       
+                        </div>
+                        </div>
+                     </div>
+                   </div>
+                   <div class="panel-footer">
+                       
+                   </div>
+               </div>
+           
+           </div>
+            </div>
+
+     </div>
+    </div>
+    <div class="main_right">
+        
+    </div>
+
+
+</block>

@@ -15,13 +15,9 @@
 <script type="text/javascript" src="/3_12/weibo/Public/Home/js/base.js"></script>
 
 
-    <script src="/3_12/weibo/Public/Home/js/jquery-migrate-1.2.1.js"></script>
-    <script type="text/javascript" src="/3_12/weibo/Public/Home/uploadify/jquery.uploadify.min.js"></script> 
-    <script type="text/javascript" src="/3_12/weibo/Public/Home/jcrop/js/jquery.Jcrop.js"></script> 
-    <link rel="stylesheet" href="/3_12/weibo/Public/Home/uploadify/uploadify.css">
-     <link rel="stylesheet" href="/3_12/weibo/Public/Home/jcrop/css/jquery.Jcrop.css">
     <script src="/3_12/weibo/Public/Home/js/setting.js"></script>
     <link rel="stylesheet" href="/3_12/weibo/Public/Home/css/setting.css">
+
 
 <script type="text/javascript">
 var ThinkPHP={
@@ -56,9 +52,9 @@ var ThinkPHP={
             <ul>
             <li><a href="#"><?php echo session('user_auth')['username'];?></a></li>
             <li class="app">
-                消息
+                消息<span class="badge"><?php echo ($count); ?></span>
                 <dl class="list" style="display:none">
-                    <dd><a href="#">@提到我的</a></dd>
+                    <dd><span class="badge text-right"><?php echo ($count); ?></span><a href="<?php echo U('Setting/refer');?>">@提到我的</a></dd>
                     <dd><a href="#">收到的评论</a></dd>
                     <dd><a href="#">发出的评论</a></dd>
                     <dd><a href="#">我的私信</a></dd>
@@ -88,31 +84,35 @@ var ThinkPHP={
 </header>
     <main id="main" class="clear">
     
+<style>
+   .main_right dl dd{
+        border-bottom: :1px solid #ccc;
+    }
+
+</style>
     <div class="main_left">
     <ul>
-    <li><a href="<?php echo U('setting/index');?>" >个人设置</a></li>
-    <li><a href="<?php echo U('setting/avatar');?>" class="selected">头像设置</a></li>
+    <li><a href="<?php echo U('setting/index');?>" >个人设置
+    </a></li>
+    <li><a href="<?php echo U('setting/avatar');?>">头像设置</a></li>
     <li><a href="<?php echo U('setting/domain');?>" >个性域名</a></li>
-    <li><a href="<?php echo U('setting/refer');?>"  >@提及到我</a></li>
+    <li><a href="<?php echo U('setting/refer');?>"  class="selected">@提及到我</a></li>
     </ul>
     </div>
     <div class="main_right">
-    <h2>头像设置</h2>
-    <div class="face" style="margin-bottom:5px;">
-        <img id="face" src="<?php echo ($face); ?>" />
-        <span id="preview_box" class="crop_preview" style="display:none">
-            <img id="crop_preview"src="/3_12/weibo/Public/Home/img/big.jpg" />
-        </span>
-        <a href="javascript:void(0)" class="save btn btn-default">保存</a>
-        <a href="javascript:void(0)" class="cancel btn btn-default">取消</a>
-        <input type="file" id="file" />
-        <input type="hidden" id="x" name="x">
-        <input type="hidden" id="y" name="y">
-        <input type="hidden" id="w" name="w">
-        <input type="hidden" id="h" name="h">
-        <input type="hidden" id="url" name="url">
-    </div>
-    
+        <h2>@提及到我</h2>
+        <dl style="font-size:14px;">
+        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i; if($item["read"] == 1): ?><dd class="a">
+            您 被 微 博 ： “ 
+            <a href="<?php echo U('Home/Index/details',array('tid'=>$item['tid'],'rid'=>$item['id']));?>"  class="text-muted" ><?php echo (mb_substr($item["topic"]["content"],0,10,'utf8')); ?>...</a>”提及到！
+            </dd>
+        <?php else: ?>
+            <dd class="a">
+            您 被 微 博 ： “ 
+            <a href="<?php echo U('Home/Index/details',array('tid'=>$item['tid'],'rid'=>$item['id']));?>" ><?php echo (mb_substr($item["topic"]["content"],0,10,'utf8')); ?>...</a>”提及到！
+            </dd><?php endif; endforeach; endif; else: echo "" ;endif; ?>
+        </dl>
+
   </div>
 
 </main>

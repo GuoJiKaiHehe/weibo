@@ -12,9 +12,9 @@
             <ul>
             <li><a href="#">{:session('user_auth')['username']}</a></li>
             <li class="app">
-                消息
+                消息<span class="badge">{$count}</span>
                 <dl class="list" style="display:none">
-                    <dd><a href="#">@提到我的</a></dd>
+                    <dd><span class="badge text-right">{$count}</span><a href="{:U('Setting/refer')}">@提到我的</a></dd>
                     <dd><a href="#">收到的评论</a></dd>
                     <dd><a href="#">发出的评论</a></dd>
                     <dd><a href="#">我的私信</a></dd>

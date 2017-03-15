@@ -94,6 +94,7 @@ var ThinkPHP={
     </a></li>
     <li><a href="<?php echo U('setting/avatar');?>">头像设置</a></li>
     <li><a href="<?php echo U('setting/domain');?>"  class="selected">个性域名</a></li>
+    <li><a href="<?php echo U('setting/refer');?>"  >@提及到我</a></li>
     </ul>
     </div>
     <div class="main_right">
@@ -122,7 +123,7 @@ target="_blank">http://<?php echo $_SERVER['SERVER_NAME'];?>/3_12/weibo/i/<?php 
 
 </main>
 
-    <footer id="footer">
+    <footer id="footer" class="clear">
       <div class="footer_left">
     &copy; 2014 Ycku.com All Rights Reserved.</div>
     <div class="footer_right">Powered By ThinkPHP.</div>

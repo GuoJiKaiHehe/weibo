@@ -27,5 +27,17 @@ class HomeController extends Controller {
           return 0;
         }
     }
+    protected function _initialize(){
+       $refer=D('Refer');
+       $count=$refer->getReferCount(session('user_auth')['id']);
+       $this->assign('count',$count);
+    }
+
+    public function getRefer(){
+
+        if(IS_AJAX){
+            echo S('refer'.session('user_auth')['id']);
+        }
+    }
 
 }

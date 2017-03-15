@@ -22,7 +22,22 @@ $(function(){
 			background : 'none',
 			color : '#fff',
 		}).find('.list').hide();
-	})
+	});
+	
+	 getRefer()
+	function getRefer(){
+		
+		$.ajax({
+			url:ThinkPHP['MODULE']+'/Home/getRefer',
+			type:'POST',
+			success:function(data){
+				
+				$('#header .badge').text(data);
+			}
+		})
+		setTimeout(arguments.callee,5000);
+	} 
+
 });
 /* function imgLoadEvent(callback,url){
 	var img =new Image();
@@ -41,6 +56,8 @@ $(function(){
 		img.src="url";
 	
 } */
+
+
 	
 	
 

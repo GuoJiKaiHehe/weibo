@@ -61,6 +61,14 @@ class SettingController extends HomeController {
             $this->error('非法进去');
         }
     }
+    public function refer(){
+        
+        $refer=D('Refer');
+        $list=$refer->getRefer();
+
+        $this->assign('list',$list);
+        $this->display();
+    }
     
 }
 

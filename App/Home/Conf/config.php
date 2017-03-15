@@ -22,4 +22,5 @@ return array(
     //每条键值对，对应一个路由规则
     'i/:domain'=>'Home/Space/index',
     ),
+   
 );

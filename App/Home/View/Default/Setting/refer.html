@@ -1,0 +1,45 @@
+<extend name="Base/common" />
+
+<block name="head">
+    <script src="__JS__/setting.js"></script>
+    <link rel="stylesheet" href="__CSS__/setting.css">
+
+</block>
+
+
+<block name="main">
+<style>
+   .main_right dl dd{
+        border-bottom: :1px solid #ccc;
+    }
+
+</style>
+    <div class="main_left">
+    <ul>
+    <li><a href="{:U('setting/index')}" >个人设置
+    </a></li>
+    <li><a href="{:U('setting/avatar')}">头像设置</a></li>
+    <li><a href="{:U('setting/domain')}" >个性域名</a></li>
+    <li><a href="{:U('setting/refer')}"  class="selected">@提及到我</a></li>
+    </ul>
+    </div>
+    <div class="main_right">
+        <h2>@提及到我</h2>
+        <dl style="font-size:14px;">
+        <volist name="list" id="item">
+        <if condition="$item.read eq 1">
+            <dd class="a">
+            您 被 微 博 ： “ 
+            <a href="{:U('Home/Index/details',array('tid'=>$item['tid'],'rid'=>$item['id']))}"  class="text-muted" >{$item.topic.content|mb_substr=0,10,'utf8'}...</a>”提及到！
+            </dd>
+        <else/>
+            <dd class="a">
+            您 被 微 博 ： “ 
+            <a href="{:U('Home/Index/details',array('tid'=>$item['tid'],'rid'=>$item['id']))}" >{$item.topic.content|mb_substr=0,10,'utf8'}...</a>”提及到！
+            </dd>
+        </if>
+        </volist>
+        </dl>
+
+  </div>
+</block>

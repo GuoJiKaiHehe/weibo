@@ -100,8 +100,10 @@ class UserModel extends  Model{
         }
     }
     public function getUser($id=0){
-        if(!$id){
+        if($id==0){
             $id=session('user_auth')['id'];
+        }else{
+            $id=$id;
         }
         return $this->where('id='.$id)->field('username,email,intro,id,face,domain')->find();
     }
@@ -148,6 +150,11 @@ class UserModel extends  Model{
     }
     public function getUserByUsername(){
         $username=I('post.username');
+
+        return $this->where(array('username'=>$username))->field('domain,id')->find();
+    }
+    public function getUserByUsername2($username){
+        
 
         return $this->where(array('username'=>$username))->field('domain,id')->find();
     }
