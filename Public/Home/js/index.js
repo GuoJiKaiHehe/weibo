@@ -180,6 +180,94 @@ function img_center(){
 			}
 		})
 	});
+	//弹出评论窗口！
+	$('#main').on('click','.com',function(){
+		//alert('');
+		if($(this).parent().parent().find('.com_box').is(':hidden')){
+			$(this).parent().parent().find('.com_box').find('.re_com_box').hide();
+			$(this).parent().parent().find('.com_box').show();
+			var comment_content=$(this).parent().parent().find('.comment_content');
+			var tid=$(this).parent().parent().find('input[name="tid"]').val();
+			//var comment_list=comment_content.find('.comment_list');
+			
+			//发送ajax请求；
+			$.ajax({
+				url:ThinkPHP['MODULE']+'/Comment/getList',
+				type:'POST',
+				beforeSend:function(xhr){
+					
+				},
+				data:{
+					'tid':tid,
+				},
+				success:function(data){
+					comment_content.html(data);
+					setUrl();
+					//显示评论；
+					$('#main').on('click','.page_comment',function(){
+						var page=$(this).attr('page');
+						$.ajax({
+							url:ThinkPHP['MODULE']+'/Comment/getList',
+							type:'post',
+							data:{
+								'page':page,
+								'tid':tid,
+							},
+							beforeSend:function(xhr){
+								
+							},
+							success:function(data){
+								comment_content.html(data);
+								setUrl();
+							}
+						});
+					});
+				}
+			})
+		}else{
+			
+			$(this).parent().parent().find('.com_box').hide();
+		}
+		
+	});
+	
+	
+	//发表评论；
+	$('#main').on('click','.com_button',function(){
+		
+		var _this=this;
+		var tid=$(this).parent().find('input[name="tid"]').val();
+		var content=$(this).parent().find('textarea[name="comment_text"]').val();
+		var commentObj=$(this).parent().find('textarea[name="comment_text"]');
+		if(content.length>0){
+			
+		
+		$.ajax({
+			url:ThinkPHP['ROOT']+'/Comment/publish',
+			type:'POST',
+			data:{
+			   'tid':tid,
+			   'content':content,
+			},
+			beforeSend:function(xhr){
+				$(_this).attr('disable',true);
+			},
+			success:function(data){
+				$(_this).removeAttr('disable');
+				if(data>0){
+					$('#info').dialog('open').removeAttr('class').addClass('succ').html('评论成功！');
+					
+				}
+				
+				setTimeout(function(){
+					$('#info').dialog('close');
+					commentObj.val('');
+				},1000);
+			}
+		});
+		}
+	});
+	//点击获取分页内容；
 	
 	
 	

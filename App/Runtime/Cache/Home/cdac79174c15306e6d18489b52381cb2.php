@@ -166,18 +166,32 @@ var ThinkPHP={
                     <div class="footer">
                         <span class="time"><?php echo ($item["create"]); ?></span>
                         <span class="handler">赞(0) 
-                         <a href="javascript:void(0)" class="re">转播(<?php echo ($item["recount"]); ?>)</a> | 评论 | 收藏</span>
-                         <div class="re_box" style="display:none;">
+                         <a href="javascript:void(0)" class="re">转播(<?php echo ($item["recount"]); ?>)</a> |
+                         <a href="javascript:void(0)" class="com">评论(<?php echo ($item["comcount"]); ?>)</a> | 收藏(0)</span>
+                         <div class="re_box re_com_box" style="display:none;">
                             <p>表情、字数限制自行完成</p>
                             <textarea class="re_text" name="commend"></textarea>
                             <input type="text" name="reid" value="<?php echo ($item["id"]); ?>" />
                             <input class="re_button btn btn-default" type="button" value="转播">
                         </div>
+
+                        <!--评论！-->
+                        <div class="com_box re_com_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="comment_text"></textarea>
+                        <input type="hidden" name="tid" value="<?php echo ($item["id"]); ?>" />
+                        <input class="com_button btn btn-default pull-right" type="button" value="评论">
+                        <div class="comment_content">
+                        <!--这里通过Ajax插入评论列表-->
+                        <p style="text-align:center;">加载中....<img src="/3_12/weibo/Public/Home/img/loadmore.gif"
+                        alt=""></p>
+                        </div>
+                        </div>
                      </div>
             </dd>
         </dl>
 
-        <?php else: ?>
+        <?php else: ?> <!--這里是转发的微博！-->
             <dl class="weibo_content_data clear">
             <dt class="face">
                 <a href="<?php echo U('Space/index',array('id'=>$item['uid']));?>">
@@ -197,13 +211,25 @@ var ThinkPHP={
                 <div class="footer">
                     <span class="time"><?php echo ($item["create"]); ?></span>
                     <span class="handler">赞(0) 
-                     <a href="javascript:void(0)" class="re">转播(<?php echo ($item["recontent"]["recount"]); ?>)</a> | 评论 | 收藏</span>
-                     <div class="re_box" style="display:none;">
+                     <a href="javascript:void(0)" class="re">转播(<?php echo ($item["recontent"]["recount"]); ?>)</a> | 
+                     <a href="javascript:void(0)" class="com">评论(<?php echo ($item["recontent"]["comcount"]); ?>)</a> | 收藏</span>
+                     <div class="re_box re_com_box" style="display:none;">
                         <p>表情、字数限制自行完成</p>
                         <textarea class="re_text" name="commend"></textarea>
                         <input type="text" name="reid" value="<?php echo ($item["recontent"]["id"]); ?>" />
                         <input class="re_button btn btn-default" type="button" value="转播">
                     </div>
+                    <div class="com_box re_com_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="comment_text"></textarea>
+                        <input type="hidden" name="tid" value="<?php echo ($item["recontent"]["id"]); ?>" />
+                        <input class="com_button" type="button" value="评论">
+                        <div class="comment_content">
+                        <!--这里通过Ajax插入评论列表-->
+                        <p style="text-align:center;">加载中....<img src="/3_12/weibo/Public/Home/img/loadmore.gif"
+                        alt=""></p>
+                        </div>
+                        </div>
                  </div>
                 </div>
                 
@@ -212,13 +238,25 @@ var ThinkPHP={
                  <div class="footer">
                     <span class="time"><?php echo ($item["create"]); ?></span>
                     <span class="handler">赞(0) 
-                     <a href="javascript:void(0)" class="re">转播(<?php echo ($item["recount"]); ?>)</a> | 评论 | 收藏</span>
-                     <div class="re_box" style="display:none;">
+                     <a href="javascript:void(0)" class="re">转播(<?php echo ($item["recount"]); ?>)</a> | 
+                     <a href="javascript:void(0)" class="com">评论(<?php echo ($item["comcount"]); ?>)</a> | 收藏</span>
+                     <div class="re_box re_com_box" style="display:none;">
                         <p>表情、字数限制自行完成</p>
                         <textarea class="re_text" name="commend"></textarea>
                         <input type="text" name="reid" value="<?php echo ($item["id"]); ?>" />
                         <input class="re_button btn btn-default" type="button" value="转播">
                     </div>
+                    <div class="com_box re_com_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="comment_text"></textarea>
+                        <input type="hidden" name="tid" value="<?php echo ($item["id"]); ?>" />
+                        <input class="com_button" type="button" value="评论">
+                        <div class="comment_content">
+                        <!--这里通过Ajax插入评论列表-->
+                        <p style="text-align:center;">加载中....<img src="/3_12/weibo/Public/Home/img/loadmore.gif"
+                        alt=""></p>
+                        </div>
+                        </div>
                  </div>
              </dd>
             </dl><?php endif; endforeach; endif; else: echo "" ;endif; ?>

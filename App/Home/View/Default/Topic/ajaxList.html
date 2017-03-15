@@ -38,7 +38,7 @@
         </volist>
  -->
 
- <volist name="list" id="item">
+ <!-- <volist name="list" id="item">
         <dl class="weibo_content_data clear">
             <dt class="face">
                 <a href="{:U('Space/index',array('id'=>$item['uid']))}">
@@ -84,4 +84,140 @@
                      </div>
             </dd>
         </dl>
+        </volist>
+ -->
+
+
+<volist name="list" id="item">
+        <empty name="item.reid">
+        <dl class="weibo_content_data clear">
+            <dt class="face">
+                <a href="{:U('Space/index',array('id'=>$item['uid']))}">
+                    <img src="__IMG__/small_face.jpg" alt="">
+                </a>
+            </dt>
+            <dd class="content clear">
+                <h4><a href="{:U('Space/index',array('id'=>$item['uid']))}">{$item.username}</a></h4>
+                    <p>{$item.content}</p>
+                    <div class="img-list clear">
+                        <notempty name="item.image">
+                           <ol class="clear">
+                            <foreach name="item.image" item="img">
+                                
+                              <li class="small_li"> 
+                              <img src="__ROOT__{$img.thumb}" unfold="__ROOT__{$img.unfold}" source="__ROOT__{$img.source}"  alt="" />
+                               </li>
+                            </foreach>
+                            </ol>
+                            <div class="img_zoom clear" style="display:none;">
+                                <ol>
+                                <li class="in"><a href="javascript:void(0)">收起</a></li>
+                                <li class="source">
+                                <a href="__ROOT__{$img.source}"
+                                target="_blank">查看原图</a>
+                                </li>
+                                </ol>
+                                <img data-src="##"
+                                alt="">
+                                </div>
+                        </notempty>
+                    </div>
+                    <div class="footer">
+                        <span class="time">{$item.create}</span>
+                        <span class="handler">赞(0) 
+                         <a href="javascript:void(0)" class="re">转播({$item.recount})</a> |
+                         <a href="javascript:void(0)" class="com">评论({$item.comcount})</a> | 收藏(0)</span>
+                         <div class="re_box re_com_box" style="display:none;">
+                            <p>表情、字数限制自行完成</p>
+                            <textarea class="re_text" name="commend"></textarea>
+                            <input type="text" name="reid" value="{$item.id}" />
+                            <input class="re_button btn btn-default" type="button" value="转播">
+                        </div>
+
+                        <!--评论！-->
+                        <div class="com_box re_com_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="comment_text"></textarea>
+                        <input type="hidden" name="tid" value="{$item.id}" />
+                        <input class="com_button btn btn-default pull-right" type="button" value="评论">
+                        <div class="comment_content">
+                        <!--这里通过Ajax插入评论列表-->
+                        <p style="text-align:center;">加载中....<img src="__IMG__/loadmore.gif"
+                        alt=""></p>
+                        </div>
+                        </div>
+                     </div>
+            </dd>
+        </dl>
+
+        <else/> <!--這里是转发的微博！-->
+            <dl class="weibo_content_data clear">
+            <dt class="face">
+                <a href="{:U('Space/index',array('id'=>$item['uid']))}">
+                    <img src="__IMG__/small_face.jpg" alt="">
+                </a>
+            </dt>
+            <dd>
+            <h4><a href="{:U('Space/index',array('id'=>$item['uid']))}">{$item.username}</a></h4>
+            <p>
+                {$item.content}
+            </p></dd>
+
+             <dd>
+                 <div class="re_content clear">
+                <h5><a href="{:U('Space/index',array('id'=>$item['recontent']['uid']))}">{$item.recontent.username}</a></h5>
+                <p>{$item.recontent.content}</p>
+                <div class="footer">
+                    <span class="time">{$item.create}</span>
+                    <span class="handler">赞(0) 
+                     <a href="javascript:void(0)" class="re">转播({$item.recontent.recount})</a> | 
+                     <a href="javascript:void(0)" class="com">评论({$item.recontent.comcount})</a> | 收藏</span>
+                     <div class="re_box re_com_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="commend"></textarea>
+                        <input type="text" name="reid" value="{$item.recontent.id}" />
+                        <input class="re_button btn btn-default" type="button" value="转播">
+                    </div>
+                    <div class="com_box re_com_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="comment_text"></textarea>
+                        <input type="hidden" name="tid" value="{$item.recontent.id}" />
+                        <input class="com_button" type="button" value="评论">
+                        <div class="comment_content">
+                        <!--这里通过Ajax插入评论列表-->
+                        <p style="text-align:center;">加载中....<img src="__IMG__/loadmore.gif"
+                        alt=""></p>
+                        </div>
+                        </div>
+                 </div>
+                </div>
+                
+             </dd>
+             <dd>
+                 <div class="footer">
+                    <span class="time">{$item.create}</span>
+                    <span class="handler">赞(0) 
+                     <a href="javascript:void(0)" class="re">转播({$item.recount})</a> | 
+                     <a href="javascript:void(0)" class="com">评论({$item.comcount})</a> | 收藏</span>
+                     <div class="re_box re_com_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="commend"></textarea>
+                        <input type="text" name="reid" value="{$item.id}" />
+                        <input class="re_button btn btn-default" type="button" value="转播">
+                    </div>
+                    <div class="com_box re_com_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="comment_text"></textarea>
+                        <input type="hidden" name="tid" value="{$item.id}" />
+                        <input class="com_button" type="button" value="评论">
+                        <div class="comment_content">
+                        <!--这里通过Ajax插入评论列表-->
+                        <p style="text-align:center;">加载中....<img src="__IMG__/loadmore.gif"
+                        alt=""></p>
+                        </div>
+                        </div>
+                 </div>
+             </dd>
+            </dl>
+        </empty>
         </volist>

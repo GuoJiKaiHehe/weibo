@@ -285,20 +285,20 @@ float:left;
 #main .weibo_content_data dd .footer .handler {
 float:right
 }
-#main .weibo_content_data dd .footer .re_box {
+#main .weibo_content_data dd .footer .re_com_box {
 width:584px;
 border:1px solid #ccc;
 background:#fafafa;
 border-radius:4px;
 float:right;
 }
-#main .weibo_content_data dd .footer .re_box p {
+#main .weibo_content_data dd .footer .re_com_box p {
 text-align:right;
 color:#5e7c85;
 font-size:12px;
 padding:10px 23px 0 0;
 }
-#main .weibo_content_data dd .footer .re_box .re_text {
+#main .weibo_content_data dd .footer .re_com_box .re_text {
 width:520px;
 height:80px;
 background:#fff;
@@ -309,7 +309,7 @@ padding:8px;
 color:#666;
 margin:5px 25px 0 25px;
 }
-#main .weibo_content_data dd .footer .re_box .re_button {
+#main .weibo_content_data dd .footer .re_com_box .re_button {
 width:70px;
 float:right;
 margin:0 20px 10px 0;
@@ -328,6 +328,21 @@ margin:5px 0 0 0;
 color:#049;
 text-decoration:none;
 }
+#main .weibo_content_data .comment_content {
+border-top:1px solid #eee;
+width:100%;
+float:left;
+}
+#main .weibo_content_data .comment_content ol {
+padding:5px 15px 0 15px;
+}
+#main .weibo_content_data .comment_content ol li {
+line-height:200%;
+}
+#main .weibo_content_data .comment_content ol li.line {
+border-bottom:1px solid #eee;
+color:#999;
+}
 
 #footer {
 width:960px;
@@ -345,6 +360,22 @@ float:left;
 height:40px;
 line-height:40px;
 float:right;
+}
+li{
+	list-style:none;
+}
+.page {
+text-align:right;
+padding:0 15px 0 0;
+}
+.page a {
+margin:0 0 0 5px;
+padding:2px 8px 2px 8px;
+border:1px solid #eee;
+}
+.page a:hover,.page a.select {
+color:#fff !important;
+background:#333;
 }
 #loadmore{
 	color:#666;

@@ -1,0 +1,19 @@
+<volist name="list" id="obj">
+
+    <ol class="comment_list">
+    <li>
+        <empty name="obj.domain">
+        <a href="{:U('Space/index',
+        array('id'=>$obj['uid']))}" target="_blank">{$obj.username}</a>
+        <else/>
+        <a href="__ROOT__/i/{$obj.domain}"
+        target="_blank">{$obj.username}</a>
+        </empty> ：{$obj.content}
+        </li>
+        <li class="line">{$obj.create}</li>
+    </ol>
+    
+</volist>
+<div class="page">
+        {$page}
+    </div>

@@ -39,6 +39,10 @@ class TopicModel extends  Model{
         $this->where(array('id'=>$id))->setInc('reCount');
        
     }
+    public function comCount($tid){
+
+        $this->where(array('id'=>$tid))->setInc('comcount');
+    }
 
     private function format($list){
         $map=array();
@@ -68,11 +72,11 @@ $list[$key]['content']=preg_replace('/\[(a|b|c|d)_([0-9]+)\]/i',
 
         return $list;
     }
-    public function getList($first,$total=5){
+    public function getList($first,$total=10){
 
 
         return $this->format($this->table('__TOPIC__ a,__USER__ b')
-                                ->field('a.id,a.content,a.create,b.username,b.domain,a.uid,a.create,a.iid,a.reid,a.reCount')
+                                ->field('a.id,a.content,a.create,b.username,b.domain,a.uid,a.create,a.iid,a.reid,a.reCount,a.comcount')
                                 ->order('a.create DESC')
                                 ->where('a.uid=b.id')
                                 ->limit($first,$total)
@@ -84,7 +88,7 @@ $list[$key]['content']=preg_replace('/\[(a|b|c|d)_([0-9]+)\]/i',
 
         //获取转发微博的内容！；
         return $this->format($this->table('__TOPIC__ a,__USER__ b')
-                           ->field('a.id,a.content,a.create,b.username,b.domain,a.uid,a.create,a.iid,a.reid,a.reCount')
+                           ->field('a.id,a.content,a.create,b.username,b.domain,a.uid,a.create,a.iid,a.reid,a.reCount,a.comcount')
                            ->where(array('a.id='.$reid.' AND a.uid=b.id'))
                            ->select());
         
