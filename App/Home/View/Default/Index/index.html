@@ -60,12 +60,15 @@
             <li><a href="javascript:void(0)">互听的</a></li>
         </ul>
         <volist name="list" id="item">
+        <empty name="item.reid">
         <dl class="weibo_content_data clear">
             <dt class="face">
-                <a href="javascript:void(0)"><img src="__IMG__/small_face.jpg" alt=""></a>
+                <a href="{:U('Space/index',array('id'=>$item['uid']))}">
+                    <img src="__IMG__/small_face.jpg" alt="">
+                </a>
             </dt>
             <dd class="content clear">
-                <h4><a href="javascript:void(0)">{$item.username}</a></h4>
+                <h4><a href="{:U('Space/index',array('id'=>$item['uid']))}">{$item.username}</a></h4>
                     <p>{$item.content}</p>
                     <div class="img-list clear">
                         <notempty name="item.image">
@@ -92,10 +95,64 @@
                     </div>
                     <div class="footer">
                         <span class="time">{$item.create}</span>
-                        <span class="handler">赞(0) | 转播 | 评论 | 收藏</span>
+                        <span class="handler">赞(0) 
+                         <a href="javascript:void(0)" class="re">转播({$item.recount})</a> | 评论 | 收藏</span>
+                         <div class="re_box" style="display:none;">
+                            <p>表情、字数限制自行完成</p>
+                            <textarea class="re_text" name="commend"></textarea>
+                            <input type="text" name="reid" value="{$item.id}" />
+                            <input class="re_button btn btn-default" type="button" value="转播">
+                        </div>
                      </div>
             </dd>
         </dl>
+
+        <else/>
+            <dl class="weibo_content_data clear">
+            <dt class="face">
+                <a href="{:U('Space/index',array('id'=>$item['uid']))}">
+                    <img src="__IMG__/small_face.jpg" alt="">
+                </a>
+            </dt>
+            <dd>
+            <h4><a href="{:U('Space/index',array('id'=>$item['uid']))}">{$item.username}</a></h4>
+            <p>
+                {$item.content}
+            </p></dd>
+
+             <dd>
+                 <div class="re_content clear">
+                <h5><a href="{:U('Space/index',array('id'=>$item['recontent']['uid']))}">{$item.recontent.username}</a></h5>
+                <p>{$item.recontent.content}</p>
+                <div class="footer">
+                    <span class="time">{$item.create}</span>
+                    <span class="handler">赞(0) 
+                     <a href="javascript:void(0)" class="re">转播({$item.recontent.recount})</a> | 评论 | 收藏</span>
+                     <div class="re_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="commend"></textarea>
+                        <input type="text" name="reid" value="{$item.recontent.id}" />
+                        <input class="re_button btn btn-default" type="button" value="转播">
+                    </div>
+                 </div>
+                </div>
+                
+             </dd>
+             <dd>
+                 <div class="footer">
+                    <span class="time">{$item.create}</span>
+                    <span class="handler">赞(0) 
+                     <a href="javascript:void(0)" class="re">转播({$item.recount})</a> | 评论 | 收藏</span>
+                     <div class="re_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="commend"></textarea>
+                        <input type="text" name="reid" value="{$item.id}" />
+                        <input class="re_button btn btn-default" type="button" value="转播">
+                    </div>
+                 </div>
+             </dd>
+            </dl>
+        </empty>
         </volist>
         <div id="loadmore">
             正在加载<img src="__IMG__/loadmore.gif" alt="">

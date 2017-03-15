@@ -3,37 +3,52 @@ namespace Home\Controller;
 use Think\Controller;
 use Think\Upload;
 use Think\Image;
+use Home\Model\FileModel;
 class FileController extends HomeController {
     public function index(){
       
       
     }
     public function upload(){
-        $upload=new Upload();
-        $upload->rootPath=C('UPLOAD_PATH');
-        $info=$upload->upload();
-        if($info){
-            $path=$info['Filedata']['savepath'];
-            $name=$info['Filedata']['savename'];
-            $imgPath=C('UPLOAD_PATH').$path.$name;
-            $image=new Image();
-            $image->open($imgPath);
-            $thumbPath=C('UPLOAD_PATH').$path.'_150'.$name;
-            $unfoldPath=C('UPLOAD_PATH').$path.'_550'.$name;
-            $image->thumb(150,150)->save($thumbPath);
-            $image->open($imgPath);
-            $image->thumb(550,550)->save($unfoldPath);
-            $imageArr=array(
-                'thumb'=>$thumbPath,
-                'unfold'=>$unfoldPath,
-                'source'=>$imgPath,
-                );
+       $file=D('File');
+       $this->ajaxReturn($file->image());
+    }
 
-            echo json_encode($imageArr);
+    public function face(){
+        $file=D('File');
+       echo $file->face();
+    }
 
+
+    //图像裁剪；
+    public function crop(){
+        if(IS_AJAX){
+            $file=D('File');
+       echo $file->crop();
+        
         }else{
-            $this->ajaxReturn($upload->getError());
+            echo 'feifajinqu';
         }
+        
     }
 }
 
+/*$x=I('post.x');
+        $y=I('post.y');
+        $w=I('post.w');
+        $h=I('post.h');
+        $url=I('post.url');
+        $bigPath=C('FACE_PATH').session('user_auth')['id'].'.jpg';
+        $smallPath=C('FACE_PATH').session('user_auth')['id'].'_small.jpg';
+        $image=new Image();
+        $image->open($url);
+        $image->crop($w,$h,$x,$y)->save($url);
+
+        $image->thumb(200,200,Image::IMAGE_THUMB_FIXED)->save($bigPath);
+         $image->thumb(50,50,Image::IMAGE_THUMB_FIXED)->save($smallPath);
+
+        $imageArr=array(
+            'bigPath'=>$bigPath,
+            'smallPath'=>$smallPath,
+            );
+        return $imageArr;*/

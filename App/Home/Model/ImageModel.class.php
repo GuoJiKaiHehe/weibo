@@ -1,7 +1,7 @@
 <?php
 namespace Home\Model;
 use Think\Model;
-
+use Think\Image;
 class ImageModel extends  Model{
 
     public function storage($img=array()){
@@ -15,5 +15,9 @@ class ImageModel extends  Model{
        
         return substr($iid,0,-1);
         
+    }
+    public function crop(){
+        
+
     }
 }

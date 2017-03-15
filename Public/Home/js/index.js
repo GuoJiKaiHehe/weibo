@@ -135,8 +135,87 @@ function img_center(){
 		animationOutSpeed:200,
 		scrollText:'',
 		activeOverlay:false,
-	})
+	});
+	setUrl(); //设置url space、
+	
+	//转播微博按钮点击事件；
+	$('#main').on('click','.re',function(){
+		if($(this).parent().parent().find('.re_box').is(':hidden')){
+			$(this).parent().parent().find('.re_box').show();
+		}else{
+			$(this).parent().parent().find('.re_box').hide();
+		}
+		
+		
+	});
+	//点击转发按钮；
+	$('#main').on('click','.re_button',function(){
+		var _this=this;
+		var reid=$(this).parent().find('input[name="reid"]').val();
+		var content=$(this).parent().find('.re_text').val();
+		
+		$.ajax({
+			type:'POST',
+			url:ThinkPHP['MODULE']+'/Topic/reBroadCast',
+			data:{
+				'reid':reid,
+				'content':content,
+			},
+			beforeSend:function(e){
+				$(_this).attr('disable',true);
+			},
+			success:function(data){
+				if(data){
+					
+				
+					$('#info').dialog('open').removeAttr('class').addClass('succ').html('转播成功！');
+					
+					setTimeout(function(){
+						$('#info').dialog('close')
+						$(_this).removeAttr('disable');
+						$(_this).parent().find('.re_text').val('');
+						$(_this).parent().hide();
+					},1000);
+				}
+			}
+		})
+	});
+	
+	
+	
 });//document.readyState
+function setUrl(){
+	
+		
+	
+	for(var i=0;i<$('.space').length;i++){
+		var username=$('.space').eq(i).text().substr(1);
+		if($('.space').eq(i).attr('flag')!='true'){
+			$.ajax({
+				url:ThinkPHP['MODULE']+'/Space/setUrl',
+				type:'POST',
+				data:{'username':username},
+				beforeSend:function(xhr){
+					
+				},
+				async:false,
+				success:function(data){
+					if(data){
+						//alert(data);
+						$('.space').eq(i).attr('flag','true');
+						console.log($('.space').get(i));
+						$('.space').get(i).href = data;
+					}else{
+						$('.space').eq(i).replaceWith('@'+username+' ');
+					}
+				}
+			});
+		}
+	}
+	
+}
+
+
 
 function send_ajax(img){
 	$.ajax({

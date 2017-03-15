@@ -42,4 +42,13 @@ class TopicController extends HomeController {
            //总页数；
        
     }
+
+
+    public function reBroadCast(){
+        if(IS_AJAX){
+            $topic=D('Topic');
+        echo $topic->publish('',I('post.reid'));
+
+        }
+    }
 }

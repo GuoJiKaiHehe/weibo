@@ -1,0 +1,31 @@
+<extend name="Base/common" />
+
+<block name="head">
+    <script src="__JS__/setting.js"></script>
+    <link rel="stylesheet" href="__CSS__/setting.css">
+</block>
+
+<block name="main">
+    <div class="main_left">
+    <ul>
+    <li><a href="{:U('setting/index')}" class="selected">个人设置
+    </a></li>
+    <li><a href="{:U('setting/avatar')}">头像设置</a></li>
+    <li><a href="{:U('setting/domain')}" >个性域名</a></li>
+    </ul>
+    </div>
+    <div class="main_right">
+    <h2>个人设置</h2>
+    <dl>
+    <dd>帐号名称：<strong>{$user.username}</strong></dd>
+    <dd>电子邮箱：<strong>{$user.email}</strong>
+     <b style="color:red;">*</b></dd>
+    <dd><span> 个 人 简 介 ： </span>
+    <textarea name="intro">{$user.intro}</textarea></dd>
+    <dd><input type="submit" value="修改" class="submit btn btn-primary" ></dd>
+    </dl>
+    <p style="margin:20px
+    0;font-size:13px;color:red;text-align:center;">(PS：这里为了不再重复，不做
+    前后端验证)</p>
+  </div>
+</block>

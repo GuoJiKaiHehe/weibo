@@ -1,0 +1,39 @@
+jcrop  插件；
+
+1.引入js 和css；
+
+2.$('#face').jcrop();  //启用
+<img src="1.jpg" />
+<span id="preview box" class="crop preview"><img src="1.jpg" /></span>
+
+3.设置好css；
+position:absolute;
+left:520px;
+top:0;
+width:120px;
+height:120px;
+overflow:hidden; 
+//能裁剪了；
+
+4.2.$('#face').jcrop({
+//锁定中恒比；
+onChange:showPreview,
+onSelect:showPrevie,
+aspectRatio:1
+})
+function showPrevie(coord){
+ if(parseInt(coords.w)>0){
+    var rx=$('#preview_box').width()/coords.w;
+    var  ry=$('#preview_box').height()/coords.h;
+    $('#crop_preview').css({
+       width:Math.round(rx*$('#face').width())+'px',
+       height:Math.round(rx*$('#face').height()),
+       marginLeft:'-'+Math.round(rx*coords.x),
+       marginTop:'-'+Math.round(ry*coords.y),
+    });
+  }
+}
+
+
+
+

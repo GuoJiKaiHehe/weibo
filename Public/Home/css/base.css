@@ -62,7 +62,9 @@ background:url(../img/weibo_bg.jpg);
 ul,ol {
 list-style:none;
 }
-
+li{
+	list-style:none;
+}
 #info {
 line-height:50px;
 font-size:14px;
@@ -80,3 +82,11 @@ color:#666;
 .Infoerror{
 	background:url(../img/error.png) no-repeat 20px center !important;
 }
+
+
+
+
+
+
+
+

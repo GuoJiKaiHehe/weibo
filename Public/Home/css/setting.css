@@ -1,0 +1,121 @@
+#main .main_left {
+width:169px;
+padding:0 10px;
+min-height:800px;
+background:#f7f7f7;
+float:left;
+}
+#main .main_left ul {
+text-align:center;
+font-size:13px;
+padding:20px 0 0 0;
+}
+#main .main_left ul li {
+height:30px;
+line-height:30px;
+margin:0 0 2px 0;
+}
+#main .main_left ul li a {
+display:block;
+color:#666;
+text-decoration:none;
+}
+#main .main_left ul li a:hover,#main .main_left ul li a.selected {
+color:#eee;
+background:#333;
+}
+#main .main_right {
+width:730px;
+min-height:800px;
+padding:0 20px;
+background:#fff;
+border-left:1px solid #ddd;
+float:right;
+
+}
+#main .main_right h2 {
+	text-align:center;
+	font-weight:bold;
+font-size:14px;
+color:#333;
+height:35px;
+line-height:35px;
+margin:10px 0 0 0;
+border-bottom:1px solid #ddd;
+}
+#main .main_right dl {
+font-size:13px;
+color:#333;
+margin:5px 0 0 0;
+}
+#main .main_right dl dd {
+padding:5px 0;
+}
+#main .main_right dl dd span {
+vertical-align:76px;
+}
+#main .main_right dl dd input.text {
+width:300px;
+height:20px;
+padding:5px;
+border-radius:3px;
+border:1px solid #ccc;
+background:#fff;
+font-size:13px;
+color:#333;
+}
+#main .main_right dl dd textarea {
+width:300px;
+height:80px;
+padding:5px;
+border-radius:3px;
+border:1px solid #ccc;
+background:#fff;
+color:#333;
+font-size:13px;
+resize:none;
+}
+#main .main_right dl dd input.submit {
+width:80px;
+margin:0 0 0 65px;
+}
+#main .face{
+	position:relative;
+}
+.crop_preview{
+	position:absolute;
+	
+	width:120px;
+	height:120px;
+	overflow:hidden;
+}
+#main .main_right #preview_box{
+	position:absolute;
+	top:0px;
+	right:0;
+	width:200px;
+	height:200px;
+	
+}
+#main .save, #main .cancel{
+	margin:10px 0;
+	display:none;
+	
+}
+li{
+	list-style:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

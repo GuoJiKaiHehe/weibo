@@ -63,14 +63,15 @@ class UserModel extends  Model{
         if($userObj){
             $update=array(
                 'id'=>$userObj['id'],
-                'last_login'=>NOW_TIME,
+                'last_login'=>time(),
                 'last_ip'=>get_client_ip(1),
             );
             $this->save($update);
             $auth=array(
                 'id'=>$userObj['id'],
                 'username'=>$userObj['username'],
-                'last_login'=>$userObj['last_login'],
+                'face'=>json_decode($userObj['face']),
+               
             );
             session('user_auth',$auth);
             if($auto=='on'){
@@ -102,8 +103,9 @@ class UserModel extends  Model{
         if(!$id){
             $id=session('user_auth')['id'];
         }
-        return $this->where('id='.$id)->find();
+        return $this->where('id='.$id)->field('username,email,intro,id,face,domain')->find();
     }
+
     public function updateUser(){
          $id=session('user_auth')['id'];
          $data=array(
@@ -111,4 +113,44 @@ class UserModel extends  Model{
         );
         return  $this->where('id='.$id)->save($data);
     }
+    //修改头像；
+    public function updateFace($img){
+         $id=session('user_auth')['id'];
+         $data=array(
+            'face'=>$img,
+        );
+         return $this->where('id='.$id)->save($data);
+    }
+    public function updateField($field){
+        $id=session('user_auth')['id'];
+
+        $data=array(
+            $field=>I('post.'.$field),
+        );
+        return $this->where('id='.$id)->save($data);
+    }
+    public function getFace(){
+        $id=session('user_auth')['id'];
+        return $this->where('id='.$id)->field('face')->find();
+    }
+
+
+
+    public function getUserByDomain($domain){
+
+        if($domain){
+
+        $map=array();
+        $map['domain']=$domain;
+        return $this->where("domain='$domain'")->field('face,username,intro,email')->find();
+    }
+
+    }
+    public function getUserByUsername(){
+        $username=I('post.username');
+
+        return $this->where(array('username'=>$username))->field('domain,id')->find();
+    }
+
+
 }

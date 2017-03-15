@@ -7,7 +7,7 @@
     
 <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
 <link rel="stylesheet" href="/3_12/weibo/Public/Home/css/jquery.ui.css">   
-<link rel="stylesheet" href="/3_12/weibo/Public/Home/css/base.css">
+<link rel="stylesheet" href="/3_12/weibo/Public/Home/css/indexBase.css">
 
 <script type="text/javascript" src="/3_12/weibo/Public/Home/js/jquery.js"></script>
 <script type="text/javascript" src="/3_12/weibo/Public/Home/js/jquery.ui.js"></script>
@@ -29,11 +29,14 @@
 var ThinkPHP={
     'IMG':'/3_12/weibo/Public/<?php echo MODULE_NAME;?>/img',
     'FACE':'/3_12/weibo/Public/<?php echo MODULE_NAME;?>/face',
-    'MODULE':'/3_12/weibo/index.php/Home',
+    'MODULE':'/3_12/weibo/Home',
     'INDEX':'<?php echo U("Index/index");?>',
     'ROOT':'/3_12/weibo',
     'UPLOADIFY':'/3_12/weibo/Public/Home/uploadify',
     'UPLOADURL':'<?php echo U("File/upload");?>',
+    'FACEURL':'<?php echo U("File/face");?>',
+    'IMGURL':'<?php echo U("File/image");?>',
+    'SERVER_NAME':'<?php echo $_SERVER["SERVER_NAME"];?>',
 };
 
 </script>
@@ -46,7 +49,7 @@ var ThinkPHP={
         <div class="logo">微博系统</div>
         <div class="nav">
             <ul>
-            <li><a href="#" class="selected">首页</a></li>
+            <li><a href="<?php echo U('Index/index');?>" class="selected">首页</a></li>
             <li><a href="#">图片</a></li>
             <li><a href="#">找人</a></li>
             </ul>
@@ -67,7 +70,7 @@ var ThinkPHP={
             </li>
             <li class="app">帐号
                 <dl class="list"  style="display:none">
-                    <dd><a href="#">个人设置</a></dd>
+                    <dd><a href="<?php echo U('Setting/index');?>">个人设置</a></dd>
                     <dd><a href="#">排行榜</a></dd>
                     <dd><a href="#">申请认证</a></dd>
                     <dd><a href="<?php echo U('User/logout');?>" class="line">退出»</a></dd>
@@ -133,12 +136,14 @@ var ThinkPHP={
             class="nav_arrow"></i></a></li>
             <li><a href="javascript:void(0)">互听的</a></li>
         </ul>
-        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?><dl class="weibo_content_data clear">
+        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i; if(empty($item["reid"])): ?><dl class="weibo_content_data clear">
             <dt class="face">
-                <a href="javascript:void(0)"><img src="/3_12/weibo/Public/Home/img/small_face.jpg" alt=""></a>
+                <a href="<?php echo U('Space/index',array('id'=>$item['uid']));?>">
+                    <img src="/3_12/weibo/Public/Home/img/small_face.jpg" alt="">
+                </a>
             </dt>
             <dd class="content clear">
-                <h4><a href="javascript:void(0)"><?php echo ($item["username"]); ?></a></h4>
+                <h4><a href="<?php echo U('Space/index',array('id'=>$item['uid']));?>"><?php echo ($item["username"]); ?></a></h4>
                     <p><?php echo ($item["content"]); ?></p>
                     <div class="img-list clear">
                         <?php if(!empty($item["image"])): ?><ol class="clear">
@@ -160,10 +165,63 @@ var ThinkPHP={
                     </div>
                     <div class="footer">
                         <span class="time"><?php echo ($item["create"]); ?></span>
-                        <span class="handler">赞(0) | 转播 | 评论 | 收藏</span>
+                        <span class="handler">赞(0) 
+                         <a href="javascript:void(0)" class="re">转播(<?php echo ($item["recount"]); ?>)</a> | 评论 | 收藏</span>
+                         <div class="re_box" style="display:none;">
+                            <p>表情、字数限制自行完成</p>
+                            <textarea class="re_text" name="commend"></textarea>
+                            <input type="text" name="reid" value="<?php echo ($item["id"]); ?>" />
+                            <input class="re_button btn btn-default" type="button" value="转播">
+                        </div>
                      </div>
             </dd>
-        </dl><?php endforeach; endif; else: echo "" ;endif; ?>
+        </dl>
+
+        <?php else: ?>
+            <dl class="weibo_content_data clear">
+            <dt class="face">
+                <a href="<?php echo U('Space/index',array('id'=>$item['uid']));?>">
+                    <img src="/3_12/weibo/Public/Home/img/small_face.jpg" alt="">
+                </a>
+            </dt>
+            <dd>
+            <h4><a href="<?php echo U('Space/index',array('id'=>$item['uid']));?>"><?php echo ($item["username"]); ?></a></h4>
+            <p>
+                <?php echo ($item["content"]); ?>
+            </p></dd>
+
+             <dd>
+                 <div class="re_content clear">
+                <h5><a href="<?php echo U('Space/index',array('id'=>$item['recontent']['uid']));?>"><?php echo ($item["recontent"]["username"]); ?></a></h5>
+                <p><?php echo ($item["recontent"]["content"]); ?></p>
+                <div class="footer">
+                    <span class="time"><?php echo ($item["create"]); ?></span>
+                    <span class="handler">赞(0) 
+                     <a href="javascript:void(0)" class="re">转播(<?php echo ($item["recontent"]["recount"]); ?>)</a> | 评论 | 收藏</span>
+                     <div class="re_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="commend"></textarea>
+                        <input type="text" name="reid" value="<?php echo ($item["recontent"]["id"]); ?>" />
+                        <input class="re_button btn btn-default" type="button" value="转播">
+                    </div>
+                 </div>
+                </div>
+                
+             </dd>
+             <dd>
+                 <div class="footer">
+                    <span class="time"><?php echo ($item["create"]); ?></span>
+                    <span class="handler">赞(0) 
+                     <a href="javascript:void(0)" class="re">转播(<?php echo ($item["recount"]); ?>)</a> | 评论 | 收藏</span>
+                     <div class="re_box" style="display:none;">
+                        <p>表情、字数限制自行完成</p>
+                        <textarea class="re_text" name="commend"></textarea>
+                        <input type="text" name="reid" value="<?php echo ($item["id"]); ?>" />
+                        <input class="re_button btn btn-default" type="button" value="转播">
+                    </div>
+                 </div>
+             </dd>
+            </dl><?php endif; endforeach; endif; else: echo "" ;endif; ?>
         <div id="loadmore">
             正在加载<img src="/3_12/weibo/Public/Home/img/loadmore.gif" alt="">
         </div>
@@ -222,7 +280,7 @@ var ThinkPHP={
 
 </main>
 
-    <footer id="footer">
+    <footer id="footer" class="clear">
       <div class="footer_left">
     &copy; 2014 Ycku.com All Rights Reserved.</div>
     <div class="footer_right">Powered By ThinkPHP.</div>

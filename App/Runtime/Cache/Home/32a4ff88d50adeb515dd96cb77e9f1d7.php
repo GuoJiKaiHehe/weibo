@@ -16,7 +16,7 @@
     <script type="text/javascript">
     var ThinkPHP={
         'IMG':'/3_12/weibo/Public/<?php echo MODULE_NAME;?>/img',
-        'MODULE':'/3_12/weibo/index.php/Home',
+        'MODULE':'/3_12/weibo/Home',
         'INDEX':'<?php echo U("Index/index");?>',
     };
    

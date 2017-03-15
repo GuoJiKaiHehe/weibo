@@ -1,0 +1,45 @@
+<extend name="Base/common" />
+
+<block name="head">
+    <script src="__JS__/jquery-migrate-1.2.1.js"></script>
+    <script type="text/javascript" src="__UPLOADIFY__/jquery.uploadify.min.js"></script> 
+    <script type="text/javascript" src="__JCROP__/js/jquery.Jcrop.js"></script> 
+    <link rel="stylesheet" href="__UPLOADIFY__/uploadify.css">
+     <link rel="stylesheet" href="__JCROP__/css/jquery.Jcrop.css">
+    <script src="__JS__/setting.js"></script>
+    <link rel="stylesheet" href="__CSS__/setting.css">
+</block>
+
+<block name="main">
+    <div class="main_left">
+    <ul>
+    <li><a href="{:U('setting/index')}" >个人设置
+    </a></li>
+    <li><a href="{:U('setting/avatar')}">头像设置</a></li>
+    <li><a href="{:U('setting/domain')}"  class="selected">个性域名</a></li>
+    </ul>
+    </div>
+    <div class="main_right">
+      <h2>个性域名设置！</h2>
+        <dl>
+<dd class="domain_help" style="display:none;">个性域名必须是4 ~ 10个字符范围内，只能是数字、字母组成，且必须
+没有被注册！注册后，无法修改！</dd>
+
+<dd class="register_domain" style="display:none;">
+<input type="text" name="domain" class="form-control"><b style="color:red;">*</b>
+
+<input type="submit" value=" 注 册 " class="register btn btn-primary btn-block"
+style="margin:0;"></dd>
+    
+
+<dd class="domain"> 您 的 个 性 域 名 地 址 为 ：<a href="__ROOT__/i/{$domain}"
+target="_blank">http://{:$_SERVER['SERVER_NAME']}__ROOT__/i/{$domain}</a></dd>
+
+</dl>
+<p style="margin:20px
+0;font-size:13px;color:red;text-align:center;">(PS：这里不做前后端验证，不
+做域名唯一性验证，请自行完成)</p>
+</div>
+    
+    </div>
+</block>
